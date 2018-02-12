@@ -104,3 +104,7 @@ Just pipe that to `sh` or `parallel` to run it.
 ```sh
 ./mergelanes.sh | sh
 ```
+
+## Limitations
+
+It's not very flexible. You'll need to modify if you don't have paired end data, or if the read pairs are `_1` and `_2` instead of `_R1` and `_R2`. It also assumes reads are split over four lanes. Again, easy to modify, but probably better to make the script more flexible. Contributions welcome.
