@@ -108,3 +108,17 @@ Just pipe that to `sh` or `parallel` to run it.
 ## Limitations
 
 It's not very flexible. You'll need to modify if you don't have paired end data, or if the read pairs are `_1` and `_2` instead of `_R1` and `_R2`. It also assumes reads are split over four lanes. Again, easy to modify, but probably better to make the script more flexible. Contributions welcome.
+
+## An easier way?
+
+[Suggestion from Wei Shen](https://github.com/stephenturner/mergelanes/issues/1): 
+
+> `cut` is used to split `id1_L001_R1_001.fastq.gz` by `_` to get the sample ID.
+
+```sh
+ls *R1* | cut -d _ -f 1 | sort | uniq \
+    | while read id; do \
+        cat $id*R1*.fastq.gz > $id.R1.fastq.gz;
+        cat $id*R2*.fastq.gz > $id.R2.fastq.gz;
+      done
+```
